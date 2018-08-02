@@ -14,8 +14,8 @@
           <thead>
             <tr>
               <th>#</th>
-              <th>LXD Name</th>
               <th>LXC Name</th>
+              <th>LXD Name</th>
               <th>Image</th>
               <th>Status</th>
               <th>Action</th>
@@ -31,16 +31,16 @@
 
 <script>
   $( document ).ready(function() {
-    $.get("https://jsonplaceholder.typicode.com/todos", function(data, status){
+    $.get("http://172.28.128.5:9300/api/v1/container", function(data, status){
       console.log(data);
       $.each(data, function( index, value ) {
         $( "#table-data" ).append( 
          '<tr>' +
           '<td>'+ index +'</td>' +
-          '<td>'+ value.title +'</td>' +
-          '<td>ipsum</td>' +
-          '<td>dolor</td>' +
-          '<td>sit</td>' +
+          '<td>'+ value.lxc_name +'</td>' +
+          '<td>'+ value.lxd_name +'</td>' +
+          '<td>'+ value.image +'</td>' +
+          '<td>'+ value.status +'</td>' +
           '<td>' +
             '<div class="btn-group" role="group" aria-label="Basic example">' +
               '<button type="button" class="btn btn-primary">Start</button>' +
