@@ -22,35 +22,25 @@
             </tr>
           </thead>
           <tbody id="table-data">
+            <% @lxclist.each_with_index do |lxc, index| %>
+              <tr> 
+                <td><%= index+1 %></td> 
+                <td><%= lxc["lxc_name"] %></td> 
+                <td><%= lxc["lxd_name"] %></td> 
+                <td><%= lxc["image"] %></td> 
+                <td><%= lxc["status"] %></td> 
+              <td> 
+                <div class="btn-group" role="group" aria-label="Basic example"> 
+                  <button type="button" class="btn btn-primary">Start</button> 
+                  <button type="button" class="btn btn-secondary">Stop</button> 
+                  <button type="button" class="btn btn-danger">Delete</button> 
+                </div> 
+              </td> 
+              </tr>
+            <% end %>
           </tbody>
         </table>
       </div>
     </main>
   </div>
 </div>
-
-<script>
-  $( document ).ready(function() {
-    $.get("http://172.28.128.5:9300/api/v1/container", function(data, status){
-      console.log(data);
-      $.each(data, function( index, value ) {
-        $( "#table-data" ).append( 
-         '<tr>' +
-          '<td>'+ index +'</td>' +
-          '<td>'+ value.lxc_name +'</td>' +
-          '<td>'+ value.lxd_name +'</td>' +
-          '<td>'+ value.image +'</td>' +
-          '<td>'+ value.status +'</td>' +
-          '<td>' +
-            '<div class="btn-group" role="group" aria-label="Basic example">' +
-              '<button type="button" class="btn btn-primary">Start</button>' +
-              '<button type="button" class="btn btn-secondary">Stop</button>' +
-              '<button type="button" class="btn btn-danger">Delete</button>' +
-            '</div>' +
-          '</td>' +
-        '</tr>'
-        );  
-      });
-    });
-  });
-</script>
