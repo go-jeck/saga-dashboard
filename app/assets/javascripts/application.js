@@ -14,3 +14,24 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+function saveNewLxc() {
+    axios({
+        method: 'post',
+        url: '/lxc/new',
+        data: {
+          name : $('#lxc-name').val(),
+          type : $('#lxc-type').val(),
+          protocol : $('#lxc-protocol').val(),
+          server : $('#lxc-server').val(),
+          alias : $('#lxc-alias').val()
+        },
+        headers: {
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+          'Content-Type': 'application/json'
+        }
+      }).then(() => {
+        alert("New LXC Created")
+        window.location.replace(`http://localhost:3000`);
+      });
+}
