@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
@@ -7,41 +7,53 @@
       </div>
     </nav>
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <a href="lxc/new" class="btn btn-primary">Add New LXC <strong>+</strong></a>
-      <h2>Containers</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>LXC Name</th>
-              <th>LXD Name</th>
-              <th>Image</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="table-data">
-            <% @lxclist.each_with_index do |lxc, index| %>
-              <tr> 
-                <td><%= index+1 %></td> 
-                <td><%= lxc["lxc_name"] %></td> 
-                <td><%= lxc["lxd_name"] %></td> 
-                <td><%= lxc["image"] %></td> 
-                <td><%= lxc["status"] %></td> 
-              <td> 
-                <div class="btn-group" role="group" aria-label="Basic example"> 
-                  <a href="/lxc/updatestate/<%=lxc["id"]%>/<%= lxc["lxc_name"]%>/start" class="btn btn-primary">Start</a> 
-                  <a href="/lxc/updatestate/<%=lxc["id"]%>/<%= lxc["lxc_name"]%>/stop" class="btn btn-secondary">Stop</a> 
-                  <a href="/lxc/delete/<%=lxc["id"]%>" class="btn btn-danger">Delete</a> 
-                </div> 
-              </td> 
+    <div id="queryGraph" class="col-md-10 col-md-offset-1">
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <a href="lxc/new" class="btn btn-primary">Add New LXC <strong>+</strong></a>
+        <h2>Containers</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>LXC Name</th>
+                <th>LXD Name</th>
+                <th>Image</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </main>
+            </thead>
+            <tbody id="table-data">
+              <% @lxclist.each_with_index do |lxc, index| %>
+                <tr> 
+                  <td><%= index+1 %></td> 
+                  <td><%= lxc["lxc_name"] %></td> 
+                  <td><%= lxc["lxd_name"] %></td> 
+                  <td><%= lxc["image"] %></td> 
+                  <td><%= lxc["status"] %></td> 
+                <td> 
+                  <div class="btn-group" role="group" aria-label="Basic example"> 
+                    <a href="/lxc/updatestate/<%=lxc["id"]%>/<%= lxc["lxc_name"]%>/start" class="btn btn-primary">Start</a> 
+                    <a href="/lxc/updatestate/<%=lxc["id"]%>/<%= lxc["lxc_name"]%>/stop" class="btn btn-secondary">Stop</a> 
+                    <a href="/lxc/delete/<%=lxc["id"]%>" class="btn btn-danger">Delete</a> 
+                  </div> 
+                </td> 
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+    </div>
   </div>
 </div>
+
+<script>
+  $( document ).ready(function() {
+      loadGraph()
+  });
+</script>

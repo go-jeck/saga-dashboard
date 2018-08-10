@@ -35,3 +35,16 @@ function saveNewLxc() {
         window.location.replace(`http://localhost:3000`);
       });
 }
+
+function loadGraph() {
+  $("#queryGraph").html("")
+  new PromConsole.Graph({
+    node: document.querySelector("#queryGraph"),
+    width: 900,
+    height: 300,
+    duration: 3600 * 1,
+    min: 20,
+    max: 110,
+    expr: "avg by (instance) (avg_over_time(node_memory_MemFree_bytes[1h]) / avg_over_time(node_memory_MemTotal_bytes[1h])) + avg by(instance)(irate(node_cpu_seconds_total{mode='idle'}[1h])) / 2 * 100"
+  })
+}
