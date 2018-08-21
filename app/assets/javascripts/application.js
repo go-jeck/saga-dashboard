@@ -16,24 +16,41 @@
 //= require_tree .
 
 function saveNewLxc() {
-    axios({
-        method: 'post',
-        url: '/lxc/new',
-        data: {
-          name : $('#lxc-name').val(),
-          type : $('#lxc-type').val(),
-          protocol : $('#lxc-protocol').val(),
-          server : $('#lxc-server').val(),
-          alias : $('#lxc-alias').val()
-        },
-        headers: {
-          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
-          'Content-Type': 'application/json'
-        }
-      }).then(() => {
-        alert("New LXC Created")
-        window.location.replace(`http://localhost:3000`);
-      });
+
+    if ($('#lxc-name')[0].checkValidity() && $('#lxc-alias')[0].checkValidity()) {
+        axios({
+            method: 'post',
+            url: '/lxc/new',
+            data: {
+              name : $('#lxc-name').val(),
+              alias : $('#lxc-alias').val(),
+              weight: $('#weight').val(),
+              weightValue: $('#weight-value').val(),
+            },
+            headers: {
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+              'Content-Type': 'application/json'
+            }
+          }).then(() => {
+            alert("New LXC Created")
+            window.location.replace(`http://localhost:3000`);
+          });
+    } else {
+        alert("Please fill lxc name / lxc alias !")
+    }
+
+}
+
+function setToLimit() {
+    if ($('#weight-value').val() > 100) {
+        $('#weight-value').val(() => {
+            return 100
+        })
+    } else if ($('#weight-value').val() < 0) {
+        $('#weight-value').val(() => {
+            return 1
+        })
+    }
 }
 
 function loadGraph() {
@@ -43,7 +60,7 @@ function loadGraph() {
     width: 900,
     height: 300,
     duration: 3600 * 1,
-    min: 20,
+    min: -10,
     max: 110,
     expr: "avg by (instance) (avg_over_time(node_memory_MemFree_bytes[1h]) / avg_over_time(node_memory_MemTotal_bytes[1h])) + avg by(instance)(irate(node_cpu_seconds_total{mode='idle'}[1h])) / 2 * 100"
   })

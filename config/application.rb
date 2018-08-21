@@ -10,6 +10,9 @@ module Blog
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+    config.lxc_type =  "image"
+    config.lxc_protocol = "simplestreams"
+    config.lxc_server = "https://cloud-images.ubuntu.com/daily"
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

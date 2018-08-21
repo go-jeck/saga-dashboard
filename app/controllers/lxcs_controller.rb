@@ -6,14 +6,17 @@ class LxcsController < ApplicationController
     end
 
     def store_new_lxc
+        puts `===> #{Rails.application.config}`
         @result = HTTParty.post(
-            "http://172.28.128.5:9300/api/v1/container",
+            "http://172.28.128.5:9300/api/v1/lxc",
             body: {
               name: params['name'],
-              type: params['type'],
-              protocol: params['protocol'],
-              server: params['server'],
-              alias: params['alias']
+              type: Rails.application.config.lxc_type,
+              protocol: Rails.application.config.lxc_protocol,
+              server: Rails.application.config.lxc_server,
+              alias: params['alias'],
+              weight: params['weight'],
+              weightValue: params['weightValue'].to_f
             }.to_json,
             headers: {
               'Content-Type' => 'application/json',
@@ -22,28 +25,11 @@ class LxcsController < ApplicationController
     end
 
     def update_state_lxc
-        @result = HTTParty.post(
-            "http://172.28.128.5:9300/api/v1/container/updatestate",
+        @result = HTTParty.put(
+            "http://172.28.128.5:9300/api/v1/lxc",
             body: {
               id: params['id'],
-              name: params['name'], 
-              state: {
-                action: params['actionstate'], 
-                timeout: 60
-              }
-            }.to_json,
-            headers: {
-              'Content-Type' => 'application/json',
-            }
-        )
-        redirect_to root_path
-    end
-
-    def delete_lxc
-        @result = HTTParty.delete(
-            "http://172.28.128.5:9300/api/v1/container",
-            body: {
-              id: params['id']
+              status: params['actionstate']
             }.to_json,
             headers: {
               'Content-Type' => 'application/json',

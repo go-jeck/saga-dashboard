@@ -29,6 +29,7 @@
               </tr>
             </thead>
             <tbody id="table-data">
+            <% if @lxclist%>
               <% @lxclist.each_with_index do |lxc, index| %>
                 <tr> 
                   <td><%= index+1 %></td> 
@@ -38,13 +39,14 @@
                   <td><%= lxc["status"] %></td> 
                 <td> 
                   <div class="btn-group" role="group" aria-label="Basic example"> 
-                    <a href="/lxc/updatestate/<%=lxc["id"]%>/<%= lxc["lxc_name"]%>/start" class="btn btn-primary">Start</a> 
-                    <a href="/lxc/updatestate/<%=lxc["id"]%>/<%= lxc["lxc_name"]%>/stop" class="btn btn-secondary">Stop</a> 
-                    <a href="/lxc/delete/<%=lxc["id"]%>" class="btn btn-danger">Delete</a> 
+                    <a href="/lxc/updatestate/<%=lxc["id"]%>/<%= lxc["lxc_name"]%>/starting" class="btn btn-primary">Start</a> 
+                    <a href="/lxc/updatestate/<%=lxc["id"]%>/<%= lxc["lxc_name"]%>/stopping" class="btn btn-default">Stop</a> 
+                    <a href="/lxc/updatestate/<%=lxc["id"]%>/<%= lxc["lxc_name"]%>/deleting" class="btn btn-danger">Delete</a> 
                   </div> 
                 </td> 
                 </tr>
               <% end %>
+            <% end %>
             </tbody>
           </table>
         </div>
