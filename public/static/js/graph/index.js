@@ -6,7 +6,7 @@ var SECOND = 1000;
 /**
  * Graph
 */
-const prometheus_address = "http://172.28.128.3:9090/api/v1"
+const prometheus_address_api = "http://172.28.128.3:9090/api/v1"
 Prometheus.Graph = function(element, options, handleChange, handleRemove) {
   this.el = element;
   this.graphHTML = null;
@@ -204,7 +204,7 @@ Prometheus.Graph.prototype.checkTimeDrift = function() {
     var browserTime = new Date().getTime() / 1000;
     $.ajax({
         method: "GET",
-        url: `${prometheus_address}/query?query=time()`,
+        url: `${prometheus_address_api}/query?query=time()`,
         dataType: "json",
             success: function(json, textStatus) {
             if (json.status !== "success") {
@@ -232,7 +232,7 @@ Prometheus.Graph.prototype.populateInsertableMetrics = function() {
   var self = this;
   $.ajax({
       method: "GET",
-      url: `${prometheus_address}/label/__name__/values`,
+      url: `${prometheus_address_api}/label/__name__/values`,
       dataType: "json",
       success: function(json, textStatus) {
         if (json.status !== "success") {
