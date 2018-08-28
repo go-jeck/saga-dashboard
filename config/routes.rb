@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   post 'lxc/new' => 'lxcs#store_new_lxc'
   get 'lxc/delete/:id' => 'lxcs#delete_lxc'
 
-  get 'lxc-services/new/:id/:name' => 'lxcs#new_lxc_service_form'
-  post 'lxc-services/config' => `lxc#show_lxc_services_table`
+  get 'lxc-services/:lxc_id/:lxd_id' => 'lxcservices#index'
+  get 'lxc-services/new/:lxc_id/:lxd_id' => 'lxcservices#new_lxc_service_form'
+  post 'lxc-services/new/:lxc_id/:lxd_id' => 'lxcservices#store_new_lxc_service'
+  
 end

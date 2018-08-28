@@ -46,9 +46,10 @@ function saveNewLxc() {
 // Payload(?)
 function createNewLxcService() {
     if ($('#service-name')[0].checkValidity() && $('#lxc-port')[0].checkValidity() && $('#lxd-port')[0].checkValidity()) {
+        var url_path = window.location.pathname.split("/")
         axios({
             method: 'post',
-            url: 'lxc-services/new',
+            url: `/lxc-services/new/${url_path[3]}/${url_path[4]}`,
             data: {
                 service: $('#service-name').val(),
                 lxd_port: $('#lxd-port').val(),
@@ -60,7 +61,7 @@ function createNewLxcService() {
               }
             }).then(() => {
               alert("New Lxc Service Created")
-              window.location.replace(`http://localhost:3000`);
+              window.location.replace(`http://localhost:3000/lxc-services/${url_path[3]}/${url_path[4]}`);
             });
       } else {
           alert("Please fill all the fields!")

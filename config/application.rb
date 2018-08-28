@@ -14,6 +14,7 @@ module Blog
     config.lxc_protocol = "simplestreams"
     config.lxc_server = "https://cloud-images.ubuntu.com/daily"
     config.lxc_crash_status = "Failed to create"
+    config.lxc_running_status = "started"
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
