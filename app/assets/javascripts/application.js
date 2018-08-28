@@ -41,6 +41,32 @@ function saveNewLxc() {
 
 }
 
+// Payload(?)
+function createNewLxcService() {
+    if ($('#service-name')[0].checkValidity() && $('#lxc-port')[0].checkValidity() && $('#lxd-port')[0].checkValidity()) {
+        axios({
+            method: 'post',
+            url: 'lxc-services/new',
+            data: {
+                service: $('#service-name').val(),
+                lxd_port: $('#lxd-port').val(),
+                lxc_port: $('#lxc-port').val(),
+            },
+            headers: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+                'Content-Type': 'application/json'
+              }
+            }).then(() => {
+              alert("New Lxc Service Created")
+              window.location.replace(`http://localhost:3000`);
+            });
+      } else {
+          alert("Please fill all the fields!")
+      }
+}
+
+
+
 function setToLimit() {
     if ($('#weight-value').val() > 100) {
         $('#weight-value').val(() => {
