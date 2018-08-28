@@ -64,14 +64,16 @@
                       <a href="/lxc/updatestate/<%=lxc["id"]%>/<%= lxc["lxc_name"]%>/stopping" class="btn btn-warning">
                         <i class="glyphicon glyphicon-stop"></i>
                       </a> 
-                      <a href="/lxc/updatestate/<%=lxc["id"]%>/<%= lxc["lxc_name"]%>/deleting" class="btn btn-danger">
-                        <i class="glyphicon glyphicon-trash"></i>
-                      </a>
+                      <% if lxc["status"] == Rails.application.config.lxc_stop_status %>
+                        <a href="/lxc/updatestate/<%=lxc["id"]%>/<%= lxc["lxc_name"]%>/deleting" class="btn btn-danger">
+                          <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                      <% end %>
                       <% if lxc["status"] == Rails.application.config.lxc_running_status %>
-                      <a href="/lxc-services/<%=lxc["id"]%>/<%=lxc["lxd_id"]%>" class="btn btn-info">
-                        Configure Lxc Service
-                        <i class="glyphicon glyphicon-share"></i>
-                      </a>
+                        <a href="/lxc-services/<%=lxc["id"]%>/<%=lxc["lxd_id"]%>" class="btn btn-info">
+                          Configure Lxc Service
+                          <i class="glyphicon glyphicon-share"></i>
+                        </a>
                       <% end %>
                   <% end %>
                 </td> 
