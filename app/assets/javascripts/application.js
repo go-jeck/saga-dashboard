@@ -34,6 +34,8 @@ function saveNewLxc() {
           }).then(() => {
             alert("New LXC Created")
             window.location.replace(`http://localhost:3000`);
+          }).catch((err) => {
+              console.log(err)
           });
     } else {
         alert("Please fill lxc name / lxc alias !")

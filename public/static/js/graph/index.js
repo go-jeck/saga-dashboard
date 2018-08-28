@@ -203,7 +203,7 @@ Prometheus.Graph.prototype.checkTimeDrift = function() {
     var browserTime = new Date().getTime() / 1000;
     $.ajax({
         method: "GET",
-        url: "http://172.28.128.5:9090/api/v1/query?query=time()",
+        url: "http://172.28.128.3:9090/api/v1/query?query=time()",
         dataType: "json",
             success: function(json, textStatus) {
             if (json.status !== "success") {

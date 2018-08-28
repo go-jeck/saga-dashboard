@@ -548,7 +548,7 @@ PromConsole.Graph.prototype._xhrs = [];
 
 PromConsole.Graph.prototype.buildQueryUrl = function(expr) {
   var p = this.params;
-  return "http://172.28.128.5:9090" + "/api/v1/query_range?query=" +
+  return "http://172.28.128.3:9090" + "/api/v1/query_range?query=" +
     encodeURIComponent(expr) +
     "&step=" + p.duration / this.graphTd.offsetWidth +
     "&start=" + (p.endTime - p.duration) + "&end=" + p.endTime;
