@@ -16,6 +16,7 @@ module Blog
     config.lxc_crash_status = "Failed to create"
     config.lxc_running_status = "started"
     config.lxc_stop_status = "stopped"
+    config.scheduler_address = "http://172.28.128.3:9300/api/v1"
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

@@ -3,7 +3,7 @@ require 'httparty'
 class MainController < ApplicationController
   def index
     response = HTTParty.get(
-      "http://172.28.128.3:9300/api/v1/lxc",
+      "#{Rails.application.config.scheduler_address}/lxc",
       :headers => {
         "Content-Type" => "application/json"
       }

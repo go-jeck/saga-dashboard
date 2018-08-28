@@ -8,7 +8,7 @@ class LxcsController < ApplicationController
     def store_new_lxc
         puts `===> #{Rails.application.config}`
         @result = HTTParty.post(
-            "http://172.28.128.3:9300/api/v1/lxc",
+            "#{Rails.application.config.scheduler_address}/lxc",
             body: {
               name: params['name'],
               type: Rails.application.config.lxc_type,
@@ -26,7 +26,7 @@ class LxcsController < ApplicationController
 
     def update_state_lxc
         @result = HTTParty.put(
-            "http://172.28.128.3:9300/api/v1/lxc",
+            "#{Rails.application.config.scheduler_address}/lxc",
             body: {
               id: params['id'],
               status: params['actionstate']
@@ -40,7 +40,7 @@ class LxcsController < ApplicationController
 
     def delete_lxc
         @result = HTTParty.delete(
-            "http://172.28.128.3:9300/api/v1/lxc",
+            "#{Rails.application.config.scheduler_address}/lxc",
             body: {
               id: params['id'],
             }.to_json,
